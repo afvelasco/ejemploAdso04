@@ -1,3 +1,5 @@
+# Entorno virtual
+v_proyecto/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
