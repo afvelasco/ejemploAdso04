@@ -9,7 +9,7 @@ class Usuarios:
     
     def valida_login(self, id, contra):
         cifrada = hashlib.sha512(contra.encode("utf-8")).hexdigest()
-        sql = f"SELECT nombre FROM usuarios WHERE id='{id}' and contrasena='{cifrada}'"
+        sql = f"SELECT nombre FROM usuarios WHERE id_usuario='{id}' and contrasena='{cifrada}'"
         self.cursor.execute(sql)
         resultado = self.cursor.fetchall()
         if len(resultado)>0:
@@ -36,7 +36,7 @@ class Usuarios:
             nombre,extension = os.path.splitext(nuevo[3].filename)
             nuevonombre = "U" + tiempo + extension
             nuevo[3].save("uploads/"+nuevonombre)
-        sql = f"INSERT INTO usuarios (id,contrasena,nombre,rol,foto) VALUES ('{nuevo[0]}','{nuevo[4]}','{nuevo[1]}',{nuevo[2]},'{nuevonombre}')"
+        sql = f"INSERT INTO usuarios (id_usuario,contrasena,nombre,rol,foto) VALUES ('{nuevo[0]}','{nuevo[4]}','{nuevo[1]}',{nuevo[2]},'{nuevonombre}')"
         self.cursor.execute(sql)
         self.mi_DB.commit()
 
