@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar un nuevo usuario</title>
+</head>
+<body>
+    <form action="/guardausuario" method="post" enctype="multipart/form-data">
+        <label for="id">Id: </label>
+        <input type="text" required name="id"><br>
+        <label for="nombre">Nombre: </label>
+        <input type="text" required name="nombre"><br>
+        <label for="rol">Rol: </label>
+        <input type="number" required name="rol"><br>
+        <label for="foto">Foto: </label>
+        <input type="file" name="foto"><br>
+        <label for="contra">Contraseña: </label>
+        <input type="password" required name="contrasena"><br><br>
+        <label for="conficontra">Confirma Contraseña: </label>
+        <input type="password" required name="conficontra"><br><br>
+        <button>Ingresar</button>
+    </form>
+</body>
+</html>

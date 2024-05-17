@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios</title>
+</head>
+<body>
+    <h3>Gestión de Usuarios</h3>
+    <br>
+    <a href="/agregarusuario">Agregar un usuario</a> 
+    <br><br>
+    <table border>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Rol</th>
+                <th>Foto</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%  for u in usuario %}
+                <tr>
+                    <td>
+                        <input type="text" valuE="{{ u[0] }}" name="id">
+                    </td>
+                    <td>
+                        <input type="text" value="{{ u[2] }}" name="nombre">
+                    </td>
+                    <td>
+                        <input type="number" value="{{ u[3] }}" name="rol">
+                    </td>
+                    <td>
+                        <img width="100" src="uploads/{{ u[4] }}" alt="">
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
