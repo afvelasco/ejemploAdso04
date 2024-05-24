@@ -6,19 +6,29 @@ def login():
     id = request.form['id']
     contra = request.form['contrasena']
     ingresa = usuarios.valida_login(id, contra)
-    if ingresa:
+    if ingresa[0]:
+        session["login"] = True
+        session["id"] = id
+        session["nombre"] = ingresa[1]
         return redirect("/principal")
     else:
         return render_template("index.html",msg="Credenciales incorrectas")
 
 @app.route("/principal")
 def principal():
-    usu = usuarios.consulta()
-    return render_template("principal.html", usuario=usu)
+    if session.get('login') == True:
+        usu = usuarios.consulta()
+        nom=session.get('nombre')
+        return render_template("principal.html", usuario=usu,nom=nom)
+    else:
+        return redirect("/")
 
 @app.route("/agregarusuario")
 def agregarusuario():
-    return render_template("agregarusuario.html",msg="")
+    if session.get('login') == True:
+        return render_template("agregarusuario.html",msg="")
+    else:
+        return redirect("/")
 
 @app.route("/guardausuario", methods=['POST'])
 def guardausuario():
@@ -29,7 +39,10 @@ def guardausuario():
     contra = request.form['contrasena']
     confir = request.form['conficontra']
     if not usuarios.buscar(id):
-        usuarios.agregar([id,nombre,rol,foto,contra,confir])
-        return redirect('/principal')
+        if contra==confir:
+            usuarios.agregar([id,nombre,rol,foto,contra,confir])
+            return redirect('/principal')
+        else:
+            return render_template("agregarusuario.html",msg="Constraseñas no coinciden")    
     else:
-        return render_template(agregarusuario,msg="Id Usuario ya existe")
+        return render_template("agregarusuario.html",msg="Id Usuario ya existe")

@@ -7,14 +7,14 @@ class Test_usuarios:
     def setup_class(self):
         # Prepreparar entorno de prueba
         cifrada = hashlib.sha512("hola".encode("UTF-8")).hexdigest()
-        sql = f"INSERT INTO usuarios (id,contrasena) VALUES ('afv','{cifrada}')"
+        sql = f"INSERT INTO usuarios (id_usuario,contrasena) VALUES ('afv','{cifrada}')"
         cursor = mi_DB.cursor()
         cursor.execute(sql)
         mi_DB.commit()
 
     def teardown_class(self):
         # Limpiar la base de datos
-        sql=f"DELETE FROM usuarios WHERE id='afv'"
+        sql=f"DELETE FROM usuarios WHERE id_usuario='afv'"
         cursor = mi_DB.cursor()
         cursor.execute(sql)
         mi_DB.commit()
@@ -30,7 +30,7 @@ class Test_usuarios:
         # Ejecutar el método a probar (la prueba)
         resultado = usuarios.valida_login(id_entrada, contra_entrada)
         # Verificar resultados
-        assert resultado == esperado
+        assert resultado[0] == esperado
 
 
 

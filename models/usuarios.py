@@ -13,9 +13,9 @@ class Usuarios:
         self.cursor.execute(sql)
         resultado = self.cursor.fetchall()
         if len(resultado)>0:
-            return True
+            return [True,resultado[0][0]]
         else:
-            return False
+            return [False,""]
     
     def consulta(self):
         sql="SELECT * FROM usuarios"
@@ -24,7 +24,7 @@ class Usuarios:
         return resultado
     
     def buscar(self,id):
-        sql = f"SELECT nombre FROM usuarios WHERE id='{id}'"
+        sql = f"SELECT nombre FROM usuarios WHERE id_usuario='{id}'"
         self.cursor.execute(sql)
         resultado = self.cursor.fetchall()
         return len(resultado)>0
