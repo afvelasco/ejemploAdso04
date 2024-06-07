@@ -9,7 +9,7 @@ class Usuarios:
     
     def valida_login(self, id, contra):
         cifrada = hashlib.sha512(contra.encode("utf-8")).hexdigest()
-        sql = f"SELECT nombre FROM usuarios WHERE id_usuario='{id}' and contrasena='{cifrada}'"
+        sql = f"SELECT nombre FROM usuarios WHERE id_usuario='{id}' and contrasena='{cifrada}' and borrado=0"
         self.cursor.execute(sql)
         resultado = self.cursor.fetchall()
         if len(resultado)>0:
@@ -18,13 +18,13 @@ class Usuarios:
             return [False,""]
     
     def consulta(self):
-        sql="SELECT * FROM usuarios"
+        sql="SELECT * FROM usuarios WHERE borrado=0"
         self.cursor.execute(sql)
         resultado = self.cursor.fetchall()
         return resultado
     
     def buscar(self,id):
-        sql = f"SELECT nombre FROM usuarios WHERE id_usuario='{id}'"
+        sql = f"SELECT nombre FROM usuarios WHERE id_usuario='{id}' WHERE borrado=0"
         self.cursor.execute(sql)
         resultado = self.cursor.fetchall()
         return len(resultado)>0
@@ -42,7 +42,7 @@ class Usuarios:
         self.mi_DB.commit()
 
     def consulta_usuario(self,id):
-        sql = f"SELECT * FROM usuarios WHERE id_usuario='{id}'"
+        sql = f"SELECT * FROM usuarios WHERE id_usuario='{id}' and borrado=0"
         self.cursor.execute(sql)
         resultado = self.cursor.fetchall()
         return resultado
@@ -71,5 +71,9 @@ class Usuarios:
             self.cursor.execute(sql)
             self.mi_DB.commit()
 
+    def elimina_usuario(self,id):
+        sql = f"UPDATE usuarios SET borrado=1 WHERE id_usuario='{id}'"
+        self.cursor.execute(sql)
+        self.mi_DB.commit()
     
 usuarios = Usuarios(app,mi_DB)

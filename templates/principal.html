@@ -7,6 +7,7 @@
 </head>
 <body>
     <h3>Gestión de Usuarios</h3>
+    <h5>{{usu}}</h5>
     <br>
     <a href="/agregarusuario">Agregar un usuario</a> 
     <br><br>
@@ -37,6 +38,7 @@
                     </td>
                     <td>
                         <a href="/editausuario/{{u[0]}}/0">Editar</a>
+                        <a onclick="return confirm('Seguro elimina este usuario?')" href="/borrausuario/{{u[0]}}">Eliminar</a>
                     </td>
                 </tr>
             {% endfor %}

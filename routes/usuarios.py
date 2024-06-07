@@ -72,4 +72,13 @@ def actualizausuario():
         return redirect('/principal')
     else:
         return redirect(f"/editausuario/{id}/1")
+
+@app.route('/borrausuario/<id>')
+def borrausuario(id):
+    if session.get('login') == True:
+        usuarios.elimina_usuario(id)
+        return redirect("/principal")
+    else:
+        return redirect("/")
+    
     
