@@ -53,7 +53,7 @@ class Usuarios:
         self.mi_DB.commit()
         if nuevo[4]!="":
             cifrada = hashlib.sha512(nuevo[4].encode("utf-8")).hexdigest()
-            sql = f"UPDATE usuarios SET contrasena='{nuevo[4]}' WHERE id_usuario='{nuevo[0]}'"
+            sql = f"UPDATE usuarios SET contrasena='{cifrada}' WHERE id_usuario='{nuevo[0]}'"
             self.cursor.execute(sql)
             self.mi_DB.commit()
         if nuevo[3].filename != "":
