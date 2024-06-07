@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar información del usuario</title>
+</head>
+<body>
+    <h3>EDICIÓN DE DATOS DE USUARIO</h3> <br>
+    <a href="/principal">Regresar</a>
+    <br><br>
+    <form action="/actualizausuario" method="post" enctype="multipart/form-data">
+        <label for="id">Id Usuario:</label>
+        <input readonly type="text" value="{{usu[0]}}" name="id">
+        <br>
+        <label for="nombre">Nombre:</label>
+        <input required type="text" value="{{usu[1]}}" name="nombre">
+        <br>
+        <label for="rol">Rol:</label>
+        <input required type="number" value="{{usu[3]}}" name="rol">
+        <br>
+        <label for="foto">Foto:</label>
+        <img width="100" src="/uploads/{{usu[4]}}" alt="">
+        <input type="file" name="foto">
+        <br>
+        <label for="contra">Contraseña:</label>
+        <input required type="password" name="contra" >
+        <br>
+        <label for="confir">Confima Contraseña:</label>
+        <input required type="password" name="confir" >
+        <br><br>
+        <button>Guardar</button>
+    </form> 
+    <h3>{{msg}}</h3>   
+</body>
+</html>
