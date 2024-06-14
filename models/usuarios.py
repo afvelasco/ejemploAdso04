@@ -1,5 +1,7 @@
 from conexion import *
 import hashlib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 class Usuarios:
     def __init__(self,app, miDB):
@@ -75,5 +77,26 @@ class Usuarios:
         sql = f"UPDATE usuarios SET borrado=1 WHERE id_usuario='{id}'"
         self.cursor.execute(sql)
         self.mi_DB.commit()
+        
+    def envia_mensaje(self,email):
+        remitente = 'adso04cab@outlook.com'
+        destinatario = email
+        mensaje = MIMEMultipart()
+        mensaje['From'] = remitente
+        mensaje['To'] = destinatario
+        mensaje['Subject'] = "Prueba desde Python"
+        cuerpo = "Este es un mensaje de prueba enviado desde Nombre de Aplicación (Python)"
+        mensaje.attach(MIMEText(cuerpo, 'plain'))
+        nombre_usuario = 'adso04cab@outlook.com'
+        password = '4ds0oA-c4b'
+        server = smtplib.SMTP('smtp.office365.com:587')
+        server.starttls()
+        server.login(nombre_usuario, password)
+        server.sendmail(remitente, destinatario, mensaje.as_string())
+        server.quit()
+        
+        
+        
+        
     
 usuarios = Usuarios(app,mi_DB)

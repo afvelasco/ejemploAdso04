@@ -80,5 +80,10 @@ def borrausuario(id):
         return redirect("/principal")
     else:
         return redirect("/")
+
+@app.route('/enviamensaje/<email>')
+def enviamensaje(email):
+    usuarios.envia_mensaje(email)
+    return redirect("/principal")
     
     

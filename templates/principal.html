@@ -18,6 +18,7 @@
                 <th>Nombre</th>
                 <th>Rol</th>
                 <th>Foto</th>
+                <th>Email</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -37,8 +38,12 @@
                         <img width="100" src="uploads/{{ u[4] }}" alt="">
                     </td>
                     <td>
+                        <input type="text" value="{{ u[6] }}">
+                    </td>
+                    <td>
                         <a href="/editausuario/{{u[0]}}/0">Editar</a>
                         <a onclick="return confirm('Seguro elimina este usuario?')" href="/borrausuario/{{u[0]}}">Eliminar</a>
+                        <a href="/enviamensaje/{{u[6]}}">Mensaje</a>
                     </td>
                 </tr>
             {% endfor %}

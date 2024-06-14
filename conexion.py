@@ -3,6 +3,7 @@ from flask import Flask, render_template,request,redirect,send_from_directory,se
 import mysql.connector
 import os
 from datetime import datetime, timedelta
+import smtplib
 
 app = Flask(__name__)
 app.secret_key = str(randint(10000,99999))
